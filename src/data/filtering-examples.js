@@ -114,6 +114,49 @@ export const filteringExamples = {
     }
   },
 
+  
+  vorlesungsBeispielBisBuffer: {
+    label: 'vorlesungsBeispielBisBuffer',
+    inputs: [
+      [{t:0, c:1}, {t:20, c:2}, {t:25, c:3}, {t:50, c:4}, {t:70, c:5},
+      {t:75, c:6}, {t:80, c:7}]
+      //[{t:10, c:'A'}, {t:25, c:'B'}, {t:33, c:'C'}, {t:70, c:'D'}, 90]
+    ],
+    apply: function(inputs, scheduler) {
+    	// buffer(clickStream.throttle(250ms))
+    	
+    	// inputs[0].pluck('content')
+//        .buffer(inputs[1])
+//      .map(x => `[${x}]`);
+
+// throttleTime(25, scheduler);
+
+		return inputs[0].pluck('content').buffer(inputs[0].throttleTime(10, scheduler)).map(x => `[${x}]`);
+
+		return inputs[0].buffer(inputs[0].throttleTime(5, scheduler)).map(x => x.length);
+    }
+  },
+  
+  vorlesungsBeispiel: {
+    label: 'vorlesungsBeispiel',
+    inputs: [
+      [{t:0, c:1}, {t:20, c:2}, {t:25, c:3}, {t:50, c:4}, {t:70, c:5},
+      {t:75, c:6}, {t:80, c:7}]
+      //[{t:10, c:'A'}, {t:25, c:'B'}, {t:33, c:'C'}, {t:70, c:'D'}, 90]
+    ],
+    apply: function(inputs, scheduler) {
+    	// buffer(clickStream.throttle(250ms))
+    	
+    	// inputs[0].pluck('content')
+//        .buffer(inputs[1])
+//      .map(x => `[${x}]`);
+
+// throttleTime(25, scheduler);
+
+		return inputs[0].buffer(inputs[0].throttleTime(5, scheduler)).map(x => x.length);
+    }
+  },
+  
   sample: {
     label: 'sample',
     inputs: [
